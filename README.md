@@ -1,65 +1,165 @@
-<h1>E-commerce de Produtos</h1>
+# E-commerce de Produtos
 
-<h1>Integrantes:</h1>
+**Integrantes:**  
+- Murilo Luiz Calore Ritto — RA: 1997483  
+- Carlos Renato Alves de Oliveira — RA: 1162934  
 
-<b>
-Murilo Luiz Calore Ritto - RA: 1997483
+---
 
-Carlos Renato Alves de Oliveira - RA: 1162934
-</b>
+## Sobre o Projeto
 
-E-commerce API com MongoDB
+Este repositório contém uma **API de E-commerce** simples, utilizando **Node.js** e **MongoDB**.  
+O sistema oferece operações básicas de CRUD (“Create”, “Read”, “Update”, “Delete”) para as principais entidades de um e-commerce, tais como usuários, produtos, categorias, avaliações e pedidos.
 
-Este projeto é uma API simples para um sistema de e-commerce, utilizando MongoDB como banco de dados. A aplicação oferece operações básicas CRUD (Create, Read, Update, Delete) para as principais entidades de um e-commerce.
-Funcionalidades Principais
+---
 
-    Gerenciamento de usuários
+## Funcionalidades Principais
 
-    Cadastro e consulta de produtos
+- **Gerenciamento de Usuários**  
+  - Cadastro de novos usuários com data de registro automática  
+  - Atualização, listagem e remoção de usuários  
 
-    Categorização de produtos
+- **Cadastro e Consulta de Produtos**  
+  - Inserção de novos produtos (nome, descrição, preço, estoque, etc.)  
+  - Consulta de todos os produtos ou por filtro específico  
+  - Atualização e exclusão de um produto  
 
-    Avaliações de produtos
+- **Categorização de Produtos**  
+  - Criação de categorias e subcategorias para organizar o catálogo  
+  - Associação de produtos às respectivas categorias  
 
-    Processamento de pedidos
+- **Avaliações de Produtos**  
+  - Permite que usuários avaliem itens (nota e comentário)  
+  - Listagem de avaliações por produto  
 
-Estrutura do Projeto
-Modelos
+- **Processamento de Pedidos**  
+  - Criação de pedidos, vinculando usuário, produtos, quantidades e endereço de entrega  
+  - Cálculo automático do valor total  
+  - Listagem, atualização de status e exclusão de pedidos  
 
-    Usuario.js: Gerencia os dados dos usuários do sistema
+---
 
-        Cadastro com data de registro automática
+## Estrutura do Projeto
 
-        Informações de endereço e contato
+e-commerce-backend/
+├── src/
+│ ├── db.js # Configuração da conexão com MongoDB
+│ ├── logger.js # Módulo de logging (console + arquivo de log)
+│ ├── models/ # Definição de cada entidade (schema e métodos CRUD)
+│ │ ├── Usuario.js # Modelo para usuários
+│ │ ├── Produto.js # Modelo para produtos
+│ │ ├── Categoria.js # Modelo para categorias e subcategorias
+│ │ ├── Avaliacao.js # Modelo para avaliações de produtos
+│ │ └── Pedido.js # Modelo para pedidos
+│ └── scripts/ # Scripts de teste e inicialização
+│ ├── inserirUsuarios.js # Exemplo de inserção de usuários
+│ ├── inserirProdutos.js # Exemplo de inserção de produtos
+│ ├── inserirPedido.js # Script que cria um pedido via linha de comando
+│ ├── listarUsuarios.js # Exemplo de listagem de usuários
+│ ├── listarProdutos.js # Exemplo de listagem de produtos
+│ └── listarPedidos.js # Exemplo de listagem de pedidos
+├── logs/ # Pasta onde o logger grava o arquivo de log (app.log)
+├── package.json # Dependências e scripts npm
+└── README.md # Arquivo de documentação
 
-    Produto.js: Manipula os produtos disponíveis no e-commerce
+---
 
-    Categoria.js: Organiza produtos em categorias e subcategorias
+## Modelos (src/models)
 
-    Avaliacao.js: Permite que usuários avaliem produtos
+1. **Usuario.js**  
+   - Gerencia os dados dos usuários do sistema  
+   - Campos principais: `nome`, `data_registro`, `endereço`, `contato` (se aplicável)  
+   - Métodos: `inserir()`, `listar()`, `buscarPorId()`, `atualizarPorId()`, `removerPorId()`
 
-    Pedido.js: Gerencia os pedidos dos clientes
+2. **Produto.js**  
+   - Manipula os produtos disponíveis no e-commerce  
+   - Campos principais: `nome`, `descrição`, `preço`, `estoque`, `data_criacao`  
+   - Métodos: `inserir()`, `listar()`, `buscarPorId()`, `atualizarPorId()`, `removerPorId()`
 
-        Registro automático da data do pedido
+3. **Categoria.js**  
+   - Organiza produtos em categorias e subcategorias  
+   - Campos: `nome`, `descricao`, `pai` (para subcategoria)  
+   - Métodos: `inserir()`, `listar()`, `buscarPorId()`, `atualizarPorId()`, `removerPorId()`
 
-        Detalhes de produtos, quantidades e endereço de entrega
+4. **Avaliacao.js**  
+   - Permite que usuários avaliem produtos  
+   - Campos: `usuario_id`, `produto_id`, `nota`, `comentario`, `data_avaliacao`  
+   - Métodos: `inserir()`, `listarPorProduto()`, `removerPorId()`
 
-Banco de Dados
+5. **Pedido.js**  
+   - Gerencia os pedidos dos clientes  
+   - Campos: `usuario_id`, `produtos` (array com `produto_id`, `quantidade`, `preco_unitario`), `endereco_entrega`, `forma_pagamento`, `status`, `valor_total`, `data_pedido`  
+   - Métodos: `inserir()`, `listar()`, `buscarPorId()`, `atualizarStatus()`, `removerPorId()`
 
-    banco.js: Configuração da conexão com o MongoDB
+---
 
-        Conexão local padrão (mongodb://localhost:27017)
+## Banco de Dados (src/db.js)
 
-        Gerenciamento de erros com registro em log
+- Conexão padrão com MongoDB em:  
+    
+    mongodb://localhost:27017/ecommerce_db
 
-Testes
+- Exporta três funções principais:  
+- `connect()` — abre a conexão (se ainda não estiver aberta)  
+- `getDb()` — retorna a instância do banco já conectada  
+- `close()` — fecha a conexão  
 
-Arquivos de teste para cada modelo, demonstrando as operações básicas:
+---
 
-    testeUsuario.js
+## Logging (src/logger.js)
 
-    testeAvaliacao.js
+- Registra eventos no console e em arquivo (`logs/app.log`)  
+- Níveis suportados: `info`, `warn`, `error`  
+- Cada mensagem é prefixada com timestamp ISO e nível de log  
+- Estrutura resumida:
+```js
+const fs = require('fs');
+const { Console } = require('console');
 
-    testeCategoria.js
 
-    testePedido.js
+### Scripts de Teste (src/scripts)
+
+- **inserirUsuarios.js**  
+  Insere dois usuários pré-definidos e encerra.
+
+- **inserirProdutos.js**  
+  Insere dois produtos pré-definidos e encerra.
+
+- **inserirPedido.js**  
+  Aceita argumentos pela linha de comando:
+
+node inserirPedido.js <usuarioId> <prod1Id> <qtd1> <preco1> [<prod2Id> <qtd2> <preco2> …]
+
+Cria um pedido com os parâmetros informados e encerra.
+
+- **listarUsuarios.js**  
+Lista todos os usuários cadastrados.
+
+- **listarProdutos.js**  
+Lista todos os produtos cadastrados.
+
+- **listarPedidos.js**  
+Lista todos os pedidos, exibindo `_id`, `usuario_id`, `valor_total`, `status` e `data_pedido`.
+
+## Como Rodar
+
+1. **Clone este repositório**  
+   ```bash
+   git clone https://github.com/seu-usuario/e-commerce-backend.git
+   cd e-commerce-backend
+
+2. **Instale as Dependências**  
+   ```bash
+   npm install mongodb
+
+3. **Execute os Scripts de Teste**  
+   ```bash
+   node src/scripts/inserirUsuarios.js
+   node src/scripts/inserirProdutos.js
+   node src/scripts/inserirPedido.js
+   node src/scripts/listarUsuarios.js
+   node src/scripts/listarProdutos.js
+   node src/scripts/listarPedidos.js
+
+4. **Verifique o arquivo de log logs/app.log**
+    Todas as chamadas a logger.info(), logger.warn() e logger.error() serão gravadas lá, preservando o histórico de execuções.
