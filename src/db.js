@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb');
+const logger = require('./logger');
 
 const URI = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 const DB_NAME = process.env.DB_NAME || 'ecommerce_db';
@@ -8,26 +9,36 @@ let db;
 
 async function connect() {
   if (db) return db;
-  client = new MongoClient(URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-  await client.connect();
-  db = client.db(DB_NAME);
-  return db;
+  try {
+    client = new MongoClient(URI);
+    await client.connect();
+    db = client.db(DB_NAME);
+    logger.info(`Conectado ao MongoDB em "${URI}/${DB_NAME}"`);
+    return db;
+  } catch (err) {
+    logger.error('Erro ao conectar ao MongoDB:', err);
+    throw err;
+  }
 }
 
 function getDb() {
   if (!db) {
-    throw new Error('Banco de dados ainda não conectado. Chame connect() primeiro.');
+    const erro = new Error('Banco não conectado. Chame connect() primeiro.');
+    logger.error(erro);
+    throw erro;
   }
   return db;
 }
 
 async function close() {
   if (client) {
-    await client.close();
-    console.log('✕ Conexão com MongoDB encerrada');
+    try {
+      await client.close();
+      logger.info('✕ Conexão com MongoDB encerrada');
+    } catch (err) {
+      logger.error('Erro ao fechar conexão com MongoDB:', err);
+      throw err;
+    }
   }
 }
 
