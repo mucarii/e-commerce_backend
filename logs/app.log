@@ -1,0 +1,5 @@
+2025-06-06T03:14:58.755Z [INFO] Conectado ao MongoDB em "mongodb://localhost:27017/ecommerce_db"
+2025-06-06T03:14:58.758Z [INFO] ✔ Conectado ao MongoDB para limpeza do banco.
+2025-06-06T03:14:58.771Z [INFO] Coleção "usuarios" limpa. 0 documento(s) removido(s).
+2025-06-06T03:14:58.774Z [INFO] Coleção "produtos" limpa. 0 documento(s) removido(s).
+2025-06-06T03:14:58.778Z [INFO] Coleção "pedidos" limpa. 0 documento(s) removido(s).

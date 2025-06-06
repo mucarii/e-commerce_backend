@@ -43,24 +43,26 @@ O sistema oferece operações básicas de CRUD (“Create”, “Read”, “Upd
 
 e-commerce-backend/
 ├── src/
-│ ├── db.js # Configuração da conexão com MongoDB
-│ ├── logger.js # Módulo de logging (console + arquivo de log)
-│ ├── models/ # Definição de cada entidade (schema e métodos CRUD)
-│ │ ├── Usuario.js # Modelo para usuários
-│ │ ├── Produto.js # Modelo para produtos
-│ │ ├── Categoria.js # Modelo para categorias e subcategorias
-│ │ ├── Avaliacao.js # Modelo para avaliações de produtos
-│ │ └── Pedido.js # Modelo para pedidos
-│ └── scripts/ # Scripts de teste e inicialização
-│ ├── inserirUsuarios.js # Exemplo de inserção de usuários
-│ ├── inserirProdutos.js # Exemplo de inserção de produtos
-│ ├── inserirPedido.js # Script que cria um pedido via linha de comando
-│ ├── listarUsuarios.js # Exemplo de listagem de usuários
-│ ├── listarProdutos.js # Exemplo de listagem de produtos
-│ └── listarPedidos.js # Exemplo de listagem de pedidos
-├── logs/ # Pasta onde o logger grava o arquivo de log (app.log)
-├── package.json # Dependências e scripts npm
-└── README.md # Arquivo de documentação
+│   ├── db.js
+│   ├── logger.js
+│   ├── models/
+│   │   ├── Usuario.js
+│   │   ├── Produto.js
+│   │   ├── Categoria.js
+│   │   ├── Avaliacao.js
+│   │   └── Pedido.js
+│   └── scripts/
+│       ├── inserirUsuarios.js
+│       ├── inserirProdutos.js
+│       ├── inserirPedido.js
+│       ├── listarUsuarios.js
+│       ├── listarProdutos.js
+│       └── listarPedidos.js
+├── logs/
+│   └── app.log
+├── package.json
+└── README.md
+
 
 ---
 
