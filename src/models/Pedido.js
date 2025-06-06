@@ -62,7 +62,7 @@ class Pedido {
   }
 
   /**
-   * Lista pedidos (opcionalmente filtrando por usuário ou status).
+   * Lista pedidos.
    * @param {{ usuario_id?: string, status?: string }} filtro
    * @returns {Promise<Array>}
    */
