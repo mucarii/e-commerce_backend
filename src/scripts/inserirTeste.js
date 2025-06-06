@@ -1,3 +1,5 @@
+// src/scripts/inserirTeste.js
+
 const { connect, getDb, close } = require('../db');
 const Produto = require('../models/Produto');
 const Usuario = require('../models/Usuario');
@@ -10,25 +12,15 @@ async function main() {
     await connect();
     logger.info('✔ Conectado ao MongoDB');
 
-    // 2) Limpa coleções (opcional, para rodar múltiplas vezes sem duplicar)
+    // 2) (Opcional) Limpar coleções para não duplicar em múltiplas execuções
     // await getDb().collection('usuarios').deleteMany({});
     // await getDb().collection('produtos').deleteMany({});
     // await getDb().collection('pedidos').deleteMany({});
 
-    // 3) Inserir Usuários
+    // 3) Inserir Usuários (agora só com 'nome')
     logger.info('→ Inserindo usuários...');
-    const u1 = new Usuario({
-      nome: 'Alice Silva',
-      email: 'alice@gmail.com',
-      senha: 'senha123',
-      telefone: '(41) 90000-1111'
-    });
-    const u2 = new Usuario({
-      nome: 'Bruno Oliveira',
-      email: 'bruno@gmail.com',
-      senha: 'minhaSenha!',
-      telefone: '(41) 98888-2222'
-    });
+    const u1 = new Usuario({ nome: 'Alice Silva' });
+    const u2 = new Usuario({ nome: 'Bruno Oliveira' });
     const usuario1 = await Usuario.inserir(u1);
     const usuario2 = await Usuario.inserir(u2);
     logger.info('Usuários inseridos:', usuario1._id.toString(), usuario2._id.toString());
@@ -61,7 +53,7 @@ async function main() {
       ],
       endereco_entrega: 'Rua das Flores, 123, Curitiba - PR',
       forma_pagamento: 'Cartão de Crédito'
-      // status deixamos o padrão 'pendente'
+      // status ficará 'pendente' por padrão
     });
     const pInserido = await Pedido.inserir(pedido1);
     logger.info(
@@ -96,7 +88,6 @@ async function main() {
   } catch (err) {
     logger.error('✗ Erro no inserirTeste.js:', err);
   } finally {
-    // 7) Fecha conexão e sai
     await close();
     process.exit(0);
   }

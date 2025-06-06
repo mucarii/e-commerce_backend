@@ -1,3 +1,5 @@
+// src/models/Pedido.js
+
 const { ObjectId } = require('mongodb');
 const { getDb } = require('../db');
 const logger = require('../logger');
@@ -25,9 +27,7 @@ class Pedido {
     }));
     this.endereco_entrega = endereco_entrega;
     this.forma_pagamento = forma_pagamento;
-    // Se não passar status, fica “pendente”
     this.status = status || 'pendente';
-    // Calcula valor_total somando (quantidade * preco_unitario) de cada item
     this.valor_total = this.produtos.reduce(
       (acc, item) => acc + item.quantidade * item.preco_unitario,
       0
@@ -55,7 +55,8 @@ class Pedido {
         valor_total: pedidoInstancia.valor_total,
         data_pedido: pedidoInstancia.data_pedido
       });
-      return result.ops[0];
+      const insertedId = result.insertedId;
+      return await Pedido.collection().findOne({ _id: insertedId });
     } catch (err) {
       logger.error('Erro ao inserir pedido:', err);
       throw err;

@@ -13,7 +13,6 @@ class Usuario {
     this.data_registro = new Date();
   }
 
-  // Referência à coleção “usuarios” no MongoDB
   static collection() {
     return getDb().collection('usuarios');
   }
@@ -29,7 +28,9 @@ class Usuario {
         nome: usuarioInstancia.nome,
         data_registro: usuarioInstancia.data_registro
       });
-      return result.ops[0];
+      // No driver v4, 'result.ops' não existe. Usamos 'result.insertedId' e buscamos o documento
+      const insertedId = result.insertedId;
+      return await Usuario.collection().findOne({ _id: insertedId });
     } catch (err) {
       logger.error('Erro ao inserir usuário:', err);
       throw err;

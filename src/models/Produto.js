@@ -1,3 +1,5 @@
+// src/models/Produto.js
+
 const { ObjectId } = require('mongodb');
 const { getDb } = require('../db');
 const logger = require('../logger');
@@ -37,7 +39,8 @@ class Produto {
         estoque: produtoInstancia.estoque,
         data_criacao: produtoInstancia.data_criacao
       });
-      return result.ops[0];
+      const insertedId = result.insertedId;
+      return await Produto.collection().findOne({ _id: insertedId });
     } catch (err) {
       logger.error('Erro ao inserir produto:', err);
       throw err;
