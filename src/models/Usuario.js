@@ -28,7 +28,7 @@ class Usuario {
         nome: usuarioInstancia.nome,
         data_registro: usuarioInstancia.data_registro
       });
-      // No driver v4, 'result.ops' não existe. Usamos 'result.insertedId' e buscamos o documento
+      
       const insertedId = result.insertedId;
       return await Usuario.collection().findOne({ _id: insertedId });
     } catch (err) {
