@@ -9,7 +9,7 @@ if (!fs.existsSync(logsDir)) {
   fs.mkdirSync(logsDir, { recursive: true });
 }
 
-const logFilePath = path.join(logsDir, 'app.log');
+const logFilePath = path.join(logsDir, 'app.txt');
 const logFileStream = fs.createWriteStream(logFilePath, { flags: 'a' });
 
 
