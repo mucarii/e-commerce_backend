@@ -90,7 +90,7 @@ O sistema oferece operações básicas de CRUD (“Create”, “Read”, “Upd
 ```js
 const fs = require('fs');
 const { Console } = require('console');
-
+```
 
 ### Scripts de Teste (src/scripts)
 
