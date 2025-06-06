@@ -39,31 +39,6 @@ O sistema oferece operações básicas de CRUD (“Create”, “Read”, “Upd
 
 ---
 
-## Estrutura do Projeto
-
-e-commerce-backend/
-├── src/
-│   ├── db.js
-│   ├── logger.js
-│   ├── models/
-│   │   ├── Usuario.js
-│   │   ├── Produto.js
-│   │   ├── Categoria.js
-│   │   ├── Avaliacao.js
-│   │   └── Pedido.js
-│   └── scripts/
-│       ├── inserirUsuarios.js
-│       ├── inserirProdutos.js
-│       ├── inserirPedido.js
-│       ├── listarUsuarios.js
-│       ├── listarProdutos.js
-│       └── listarPedidos.js
-├── logs/
-│   └── app.log
-├── package.json
-└── README.md
----
-
 ## Modelos (src/models)
 
 1. **Usuario.js**  
