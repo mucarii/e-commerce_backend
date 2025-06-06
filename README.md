@@ -40,7 +40,7 @@ O sistema oferece operações básicas de CRUD (“Create”, “Read”, “Upd
 ---
 
 ## Estrutura do Projeto
-    ```bash
+
 e-commerce-backend/
 ├── src/
 │   ├── db.js
@@ -62,7 +62,6 @@ e-commerce-backend/
 │   └── app.log
 ├── package.json
 └── README.md
-    ```
 ---
 
 ## Modelos (src/models)
