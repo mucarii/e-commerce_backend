@@ -46,7 +46,7 @@ class Produto {
   }
 
   /**
-   * Lista produtos (pode passar filtro simples).
+   * Lista produtos.
    * @param {{}} filtro
    * @returns {Promise<Array>}
    */
