@@ -1,5 +1,3 @@
-// src/scripts/inserirTeste.js
-
 const { connect, getDb, close } = require('../db');
 const Produto = require('../models/Produto');
 const Usuario = require('../models/Usuario');
@@ -12,20 +10,15 @@ async function main() {
     await connect();
     logger.info('✔ Conectado ao MongoDB');
 
-    // 2) (Opcional) Limpar coleções para não duplicar em múltiplas execuções
-    // await getDb().collection('usuarios').deleteMany({});
-    // await getDb().collection('produtos').deleteMany({});
-    // await getDb().collection('pedidos').deleteMany({});
-
-    // 3) Inserir Usuários (agora só com 'nome')
+    // 2) Inserir Usuários (agora só com 'nome')
     logger.info('→ Inserindo usuários...');
-    const u1 = new Usuario({ nome: 'Alice Silva' });
-    const u2 = new Usuario({ nome: 'Bruno Oliveira' });
+    const u1 = new Usuario({ nome: 'Murilo Luiz' });
+    const u2 = new Usuario({ nome: 'Carlos Renato' });
     const usuario1 = await Usuario.inserir(u1);
     const usuario2 = await Usuario.inserir(u2);
     logger.info('Usuários inseridos:', usuario1._id.toString(), usuario2._id.toString());
 
-    // 4) Inserir Produtos
+    // 3) Inserir Produtos
     logger.info('→ Inserindo produtos...');
     const p1 = new Produto({
       nome: 'Mouse Gamer',
@@ -43,7 +36,7 @@ async function main() {
     const prod2 = await Produto.inserir(p2);
     logger.info('Produtos inseridos:', prod1._id.toString(), prod2._id.toString());
 
-    // 5) Inserir Pedido
+    // 4) Inserir Pedido
     logger.info('→ Inserindo pedido...');
     const pedido1 = new Pedido({
       usuario_id: usuario1._id.toString(),
@@ -51,7 +44,7 @@ async function main() {
         { produto_id: prod1._id.toString(), quantidade: 2, preco_unitario: prod1.preco },
         { produto_id: prod2._id.toString(), quantidade: 1, preco_unitario: prod2.preco }
       ],
-      endereco_entrega: 'Rua das Flores, 123, Curitiba - PR',
+      endereco_entrega: 'Rua Santos Dumont, 123, Cornélio Procópio, PR',
       forma_pagamento: 'Cartão de Crédito'
       // status ficará 'pendente' por padrão
     });
@@ -63,7 +56,7 @@ async function main() {
       pInserido.valor_total
     );
 
-    // 6) Listar tudo para ver se ficou correto
+    // 5) Listar tudo para ver se ficou correto
     logger.info('\n→ Listagem de Usuários:');
     const usuarios = await Usuario.listar();
     console.table(usuarios);

@@ -1,5 +1,3 @@
-// src/models/Produto.js
-
 const { ObjectId } = require('mongodb');
 const { getDb } = require('../db');
 const logger = require('../logger');
