@@ -120,7 +120,7 @@ Lista todos os pedidos, exibindo `_id`, `usuario_id`, `valor_total`, `status` e 
 
 1. **Clone este repositório**  
    ```bash
-   git clone https://github.com/seu-usuario/e-commerce-backend.git
+   git clone https://github.com/mucarii/e-commerce-backend.git
    cd e-commerce-backend
 
 2. **Instale as Dependências**  
